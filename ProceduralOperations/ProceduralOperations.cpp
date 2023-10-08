@@ -3,6 +3,7 @@
 
 #include "stdfh.h"
 
+
 void drawNumbers(std::vector<int> &drewNumbers, int howMany) 
 {
 	if (drewNumbers.empty())
@@ -67,7 +68,7 @@ void sortMerge(std::vector<int> &drewNumbers, int beginingV, int endV) // re_mer
 		}
 		if (j == VectorR.size())
 		{
-			tmpVector.push_back(VectorL[i]);
+			tmpVector.push_back(VectorL[i]); //if left vector is biger than right one
 		}
 
 	}
@@ -80,13 +81,57 @@ void sortMerge(std::vector<int> &drewNumbers, int beginingV, int endV) // re_mer
 	int x;
 }
 
+void display(std::vector<int>& drewNumbers)
+{
+	for (auto& y : drewNumbers)
+	{
+		std::cout << y << "\n";
+	}
+}
 int main()
 {
 	srand(time(NULL));
 	std::vector<int> numbersVector;// = NULL;
 	
-	drawNumbers(numbersVector, 10);//rand()%51 + 100); //draw 100-150 numbers
+	drawNumbers(numbersVector, 30);
+	display(numbersVector);
+
+	char userAnswear;
+	bool exitLoop = true;
+	do
+	{
+		std::cout << "\n\n\tDo you want to add more numbers? \n\n\t 1 - randomize another 10 numbers\n\t 2 declare will to give your set of numbers\n\t 3 -exit\n\n\n";
+		std::cin.get(userAnswear);
+		switch (userAnswear)
+		{
+		case '1':
+		{
+			drawNumbers(numbersVector, 10);
+			display(numbersVector);
+			break;
+		}
+		case '2':
+		{
+			//takeUserNumbers();
+			display(numbersVector);
+			break;
+		}
+		case '3':
+		{
+			break;
+		}
+		default:
+		{
+			exitLoop = false;
+			std::cout << "Answear invalid.\n\tTry Again";
+			break;
+		}
+		}
+
+
+	} while(!exitLoop);
 
 	sortMerge(numbersVector, 0, numbersVector.size());
+	display(numbersVector);
 	int i;
 }
